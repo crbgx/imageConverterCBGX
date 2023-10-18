@@ -14,14 +14,22 @@ fileType = '.png'
 im = Image.open(f'{globalPath}{imageName}{fileType}')
 pix = im.load()
 
+if im.mode != 'RGB' and im.mode != 'RGBA':
+    print(f'Mode is {im.mode}')
+    print('Please convert to RGB or RGBA')
+    exit()
+
 memoryBlockDepth = im.size[0] * im.size[1]
 rgbArray = []
 
-# Get the RGB values of each pixel (R,G,B,L)
+# Get the RGB values of each pixel (R,G,B,O)
 for y in range(0,im.size[1]):
     for x in range(0,im.size[0]):
-        # Removing L information
-        tempList = list(pix[x,y][:-1])
+        # Removing O information
+        if im.mode == 'RGBA':
+            tempList = list(pix[x,y][:-1])
+        else:
+            tempList = list(pix[x,y])
 
         # Normalizing to 0 or 1
         for i in range(0, len(tempList)):
@@ -43,3 +51,5 @@ with open(f'{globalPath}{imageName}.coe', 'w') as f:
             f.write(f'{x};\n')
         else:
             f.write(f'{x},\n')
+
+print(f'Image {imageName}{fileType} was converted to {imageName}.coe')
