@@ -7,7 +7,7 @@ from datetime import datetime
 # The .coe width is: 3 (the RGB values)
 # Useful for projects 4 & 5 in VLSI Design at LTH
 
-globalPath = '/home/cbgx/Desktop/Images/Resized_45x61/'
+globalPath = '/home/cbgx/Desktop/Images/Resized_45x61/' ## Resized_45x61 // Original
 imageName = '0'
 fileType = '.png'
 
@@ -29,7 +29,7 @@ rgbArray = []
 for y in range(0, height):
     for x in range(0, width):
         # This algorithm only works for RGBA
-        # Removing O information
+        # Removing Opacity information
         tempList = list(pix[x,y][:-1])
         # Normalizing to 0 or 1
         for i in range(0, len(tempList)):
